@@ -17,6 +17,8 @@ https://www.python.org/downloads/windows/
 > pip install openpyxl
 
 > pip install pyyaml
+
+> pip install progressbar2
 ```
 
 ### 環境設定
@@ -26,16 +28,5 @@ https://www.python.org/downloads/windows/
 ### 実行
 
 ```
-puthon makeddl.py
+> puthon makeddl.py
 ```
-
-### TODO
-
-[x] プログレスバー
-[ ] インデックス
-[ ] 型チェック
-[ ] リレーションチェック
-[ ] プライマリーキーチェック
-[ ] 項目名重複チェック
-[ ] 同一プライマリーのリレーション
-[ ] _x000D_ 置換
