@@ -21,6 +21,9 @@ class MakeDDL:
         self.f = f
         self.book = DefBook()
 
+    def write(self, s):
+        self.f.write(s.replace('_x000D_', ''))
+
     def create_table(self):
         """
         CREATE TABLE文を書き出すメソッド
@@ -32,16 +35,16 @@ class MakeDDL:
         s = 0
         for entity in self.book.entities:
 
-            self.f.write("create table " + entity.entity_info.logical_entity_name + "(\n")
+            self.write("create table " + entity.entity_info.logical_entity_name + "(\n")
             i = 0
 
             for column in entity.column_infos:
                 
                 if i == 0:
-                    self.f.write("  [" + column.physical_name + "] " + column.data_type + "\n")
+                    self.write("  [" + column.physical_name + "] " + column.data_type + "\n")
                     i = i + 1
                 else:
-                    self.f.write("  , [" + column.physical_name + "] " + column.data_type + "\n")
+                    self.write("  , [" + column.physical_name + "] " + column.data_type + "\n")
                     #self.f.write("  , [" + column.physical_name + "] " + column.physical_name + "\n")
                     #self.f.write("  , [" + column.data_type + "] " + column.data_type + "\n")
 
@@ -50,13 +53,13 @@ class MakeDDL:
             for column in entity.column_infos:
                 if column.not_null == "(PK)" or column.not_null == "Yes (PK)":
                     if i == 0:
-                        self.f.write("[" + column.physical_name + "]")
+                        self.write("[" + column.physical_name + "]")
                         i = i + 1
                     else:
-                        self.f.write(",[" + column.physical_name + "]")
+                        self.write(",[" + column.physical_name + "]")
 
-            self.f.write(")\n")
-            self.f.write(") ;\n\n")
+            self.write(")\n")
+            self.write(") ;\n\n")
             
             s = s + 1
             time.sleep(0.1)
@@ -80,26 +83,26 @@ class MakeDDL:
 
             for fk in entity.fk_relation_infos:
 
-                self.f.write("alter table " + entity.entity_info.logical_entity_name + "\n")
-                self.f.write("  add constraint " + entity.entity_info.logical_entity_name + "_FK" + str(i) + " foreign key (");
+                self.write("alter table " + entity.entity_info.logical_entity_name + "\n")
+                self.write("  add constraint " + entity.entity_info.logical_entity_name + "_FK" + str(i) + " foreign key (");
                 j = 0
                 for a in fk.column_name.split(","):
                     if j == 0:
-                        self.f.write("[" + a + "]")
+                        self.write("[" + a + "]")
                         j = 1
                     else:
-                        self.f.write(",[" + a + "]")
+                        self.write(",[" + a + "]")
 
-                self.f.write(") references " + fk.ref_entity_name + "(")
+                self.write(") references " + fk.ref_entity_name + "(")
                 j = 0
                 for b in fk.ref_column_name.split(","):
                     if j == 0:
-                        self.f.write("[" + b + "]")
+                        self.write("[" + b + "]")
                         j = 1
                     else:
-                        self.f.write(",[" + b + "]")
+                        self.write(",[" + b + "]")
 
-                self.f.write(");\n\n")
+                self.write(");\n\n")
                 i = i + 1
             s = s + 1
             time.sleep(0.1)
@@ -117,19 +120,19 @@ class MakeDDL:
         for entity in self.book.entities:
 
             if entity.entity_info.remark is None or entity.entity_info.remark == "":
-                self.f.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + entity.entity_info.logical_entity_name + "', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', NULL, NULL;\n")
+                self.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + entity.entity_info.logical_entity_name + "', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', NULL, NULL;\n")
             else:
-                self.f.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + entity.entity_info.logical_entity_name + ":" + entity.entity_info.remark + "', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', NULL, NULL;\n")
+                self.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + entity.entity_info.logical_entity_name + ":" + entity.entity_info.remark + "', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', NULL, NULL;\n")
 
             for column in entity.column_infos:
 
                 if column.remark is None or column.remark == "":
-                    self.f.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + column.physical_name + "', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', N'COLUMN', N'" + column.physical_name + "';\n")
+                    self.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + column.physical_name + "', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', N'COLUMN', N'" + column.physical_name + "';\n")
                 else:
                     
-                    self.f.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + column.physical_name + ":" + column.remark +"', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', N'COLUMN', N'" + column.physical_name + "';\n")
+                    self.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + column.physical_name + ":" + column.remark +"', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', N'COLUMN', N'" + column.physical_name + "';\n")
 
-            self.f.write("\n")
+            self.write("\n")
             s = s + 1
             time.sleep(0.1)
             pbar.update(s)
