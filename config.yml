@@ -1,2 +1,4 @@
-book_name: "Z:\\Dropbox\\Documents\\SOOP\\YHT\\wms_ui_design\\00_drafts\\design\\entity_design\\devel\\entity_design.xlsx"
-output: "Z:\\Dropbox\\Documents\\SOOP\\YHT\\wms_ui_design\\00_drafts\\design\\entity_design\\devel\\hoge.sql"
+book_name: "C:\\Users\\Kunihisa Matsuda\\Projects\\YdxWms\\makeddl\\input\\20200802_00.xlsx"
+output: "C:\\Users\\Kunihisa Matsuda\\Projects\\YdxWms\\makeddl\\output\\20200802_00.sql"
+src: "C:\\Users\\Kunihisa Matsuda\\Projects\\YdxWms\\makeddl\\input\\20200802_00_src.xlsx"
+dist: "C:\\Users\\Kunihisa Matsuda\\Projects\\YdxWms\\makeddl\\input\\20200802_00.xlsx"

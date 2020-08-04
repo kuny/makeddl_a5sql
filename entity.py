@@ -109,8 +109,12 @@ class Entity:
 				fkrealtioninfo.column_name = sheet["C" + str(row_index)].value
 				fkrealtioninfo.ref_entity_name = sheet["E" + str(row_index)].value
 				fkrealtioninfo.ref_column_name = sheet["G" + str(row_index)].value
-				self.fk_relation_infos.append(fkrealtioninfo)
-				row_index = row_index + 1
+				if fkrealtioninfo.ref_entity_name != None:
+					self.fk_relation_infos.append(fkrealtioninfo)
+					row_index = row_index + 1
+				else:
+					row_index = row_index + 3
+					break
 
 		# set PK ralation information
 		self.pk_relation_infos = []
