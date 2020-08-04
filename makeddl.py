@@ -54,9 +54,6 @@ class MakeDDL:
                         i = i + 1
                     else:
                         self.f.write(",[" + column.physical_name + "]")
-                #bar.update(p)
-                #bar.finish()
-                #p = p + 1
 
             self.f.write(")\n")
             self.f.write(") ;\n\n")

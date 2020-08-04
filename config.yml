@@ -1,4 +1,4 @@
-book_name: "C:\\Users\\Kunihisa Matsuda\\Projects\\YdxWms\\makeddl\\input\\20200802_00.xlsx"
-output: "C:\\Users\\Kunihisa Matsuda\\Projects\\YdxWms\\makeddl\\output\\20200802_00.sql"
-src: "C:\\Users\\Kunihisa Matsuda\\Projects\\YdxWms\\makeddl\\input\\20200802_00_src.xlsx"
-dist: "C:\\Users\\Kunihisa Matsuda\\Projects\\YdxWms\\makeddl\\input\\20200802_00.xlsx"
+book_name: "C:\\Users\\Kunihisa Matsuda\\Projects\\makeddl_a5sql\\input\\20200802_00.xlsx"
+output: "C:\\Users\\Kunihisa Matsuda\\Projects\\makeddl_a5sql\\output\\20200802_00.sql"
+src: "C:\\Users\\Kunihisa Matsuda\\Projects\\makeddl_a5sql\\input\\20200802_00_src.xlsx"
+dist: "C:\\Users\\Kunihisa Matsuda\\Projects\\makeddl_a5sql\\input\\20200802_00.xlsx"
