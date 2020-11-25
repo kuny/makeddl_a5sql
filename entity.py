@@ -1,4 +1,3 @@
-# coding=sjis
 
 import openpyxl
 
@@ -44,7 +43,7 @@ class RelationInfo:
 
 class Entity:
 	"""
-	ŠeƒGƒ“ƒeƒBƒeƒB‚Ìƒf[ƒ^‚ðŠi”[‚·‚éƒNƒ‰ƒX
+	å„ã‚¨ãƒ³ãƒ†ã‚£ãƒ†ã‚£ã®ãƒ‡ãƒ¼ã‚¿ã‚’æ ¼ç´ã™ã‚‹ã‚¯ãƒ©ã‚¹
 	"""
 	def __init__(self, sheet):
 		self.entity_info = EntityInfo()

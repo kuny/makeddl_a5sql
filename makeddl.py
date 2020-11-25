@@ -1,4 +1,3 @@
-# coding=sjis
 
 from defbook import EntityInfo
 from defbook import ColumnInfo
@@ -12,9 +11,9 @@ import progressbar
 
 class MakeDDL:
     """
-    DDLŒ¾Œê‚ğo—Í‚·‚éƒNƒ‰ƒX
-    ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ÉŠJ‚¢‚½ƒtƒ@ƒCƒ‹ˆø”‚Å‘ã“ü‚µ‚ÄAŠeˆ—iƒƒ\ƒbƒhj‚ğÀs‚·‚éB
-    Šeˆ—‚Íƒƒ\ƒbƒhƒ`ƒF[ƒ“‚Æ‚µ‚Äg—p‚Å‚«‚éB
+    DDLè¨€èªã‚’å‡ºåŠ›ã™ã‚‹ã‚¯ãƒ©ã‚¹
+    ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã«é–‹ã„ãŸãƒ•ã‚¡ã‚¤ãƒ«å¼•æ•°ã§ä»£å…¥ã—ã¦ã€å„å‡¦ç†ï¼ˆãƒ¡ã‚½ãƒƒãƒ‰ï¼‰ã‚’å®Ÿè¡Œã™ã‚‹ã€‚
+    å„å‡¦ç†ã¯ãƒ¡ã‚½ãƒƒãƒ‰ãƒã‚§ãƒ¼ãƒ³ã¨ã—ã¦ä½¿ç”¨ã§ãã‚‹ã€‚
     """
     def __init__(self, book_name, f):
         self.f = f
@@ -25,7 +24,7 @@ class MakeDDL:
 
     def create_table(self):
         """
-        CREATE TABLE•¶‚ğ‘‚«o‚·ƒƒ\ƒbƒh
+        CREATE TABLEæ–‡ã‚’æ›¸ãå‡ºã™ãƒ¡ã‚½ãƒƒãƒ‰
         """
 
         widgets = ['Create Table        : ', progressbar.Percentage(), ' (', progressbar.Counter(), ' of ', str(len(self.book.entities)) + ') ', progressbar.Bar(), ' ', progressbar.Timer(), ' ', progressbar.ETA(), ' ', ]
@@ -84,7 +83,7 @@ class MakeDDL:
 
     def foreign_key(self):
         """
-        ALTER TABLE•¶(FOREIGN KEY)‚ğ‘‚«o‚·ƒƒ\ƒbƒh
+        ALTER TABLEæ–‡(FOREIGN KEY)ã‚’æ›¸ãå‡ºã™ãƒ¡ã‚½ãƒƒãƒ‰
         """
         widgets = ['Alter Table (FK)    : ', progressbar.Percentage(), ' (', progressbar.Counter(), ' of ', str(len(self.book.entities)) + ') ', progressbar.Bar(), ' ', progressbar.Timer(), ' ', progressbar.ETA(), ' ', ]
         
@@ -123,7 +122,7 @@ class MakeDDL:
 
     def description(self):
         """
-        ”õl‚ğİ’è‚·‚éƒXƒNƒŠƒvƒg‚ğ‘‚«o‚·ƒƒ\ƒbƒh
+        å‚™è€ƒã‚’è¨­å®šã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’æ›¸ãå‡ºã™ãƒ¡ã‚½ãƒƒãƒ‰
         """
         widgets = ['Description         : ', progressbar.Percentage(), ' (', progressbar.Counter(), ' of ', str(len(self.book.entities)) + ') ', progressbar.Bar(), ' ', progressbar.Timer(), ' ', progressbar.ETA(), ' ', ]
         
