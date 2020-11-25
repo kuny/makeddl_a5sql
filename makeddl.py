@@ -71,7 +71,10 @@ class MakeDDL:
 
     def index(self):
 
-        widgets = ['Alter Table (index) : ', progressbar.Percentage(), ' (', progressbar.Counter(), ' of ', str(len(self.book.entities)) + ') ', progressbar.Bar(), ' ', progressbar.Timer(), ' ', progressbar.ETA(), ' ', ]
+# create index idx_hoge
+#   on NEW_ENTITY1(a,b);
+        
+        widgets = ['Create Index        : ', progressbar.Percentage(), ' (', progressbar.Counter(), ' of ', str(len(self.book.entities)) + ') ', progressbar.Bar(), ' ', progressbar.Timer(), ' ', progressbar.ETA(), ' ', ]
         
         pbar = ProgressBar(maxval=len(self.book.entities), widgets=widgets).start()
         s = 0

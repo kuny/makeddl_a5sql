@@ -8,17 +8,12 @@ A5:SQL Mk-2形式のエンティティ定義書（エクセルファイル）か
 
 ### Python3インストール
 
-下記URLよりパッケージをダウンロードしインストールする。
-https://www.python.org/downloads/windows/
-
 ### Pythonライブラリインストール
 
 ```
-> pip install openpyxl
+> pip3 install pyyaml
 
-> pip install pyyaml
-
-> pip install progressbar2
+> pip3 install progressbar2
 ```
 
 ### 環境設定
@@ -28,5 +23,5 @@ https://www.python.org/downloads/windows/
 ### 実行
 
 ```
-> puthon makeddl.py
+> puthon3 makeddl.py -b /home/hoge/input.xlsx /home/hoge/output.sql
 ```
