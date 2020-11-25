@@ -4,9 +4,8 @@ from defbook import EntityInfo
 from defbook import ColumnInfo
 from defbook import DefBook
 
-import yaml
-import os
 import time
+import argparse
 
 from progressbar import ProgressBar
 import progressbar
@@ -17,9 +16,9 @@ class MakeDDL:
     コンストラクタに開いたファイル引数で代入して、各処理（メソッド）を実行する。
     各処理はメソッドチェーンとして使用できる。
     """
-    def __init__(self, f):
+    def __init__(self, book_name, f):
         self.f = f
-        self.book = DefBook()
+        self.book = DefBook(book_name)
 
     def write(self, s):
         self.f.write(s.replace('_x000D_', ''))
@@ -154,15 +153,16 @@ class MakeDDL:
 
 if __name__ == '__main__':
 
-    with open('config.yml', encoding='utf-8') as file:
-        config = yaml.safe_load(file)
-
-        if os.path.exists(config["output"]):
-            os.remove(config["output"])
-
-        with open(config["output"], mode='w') as f:
-            MakeDDL(f) \
+    parser = argparse.ArgumentParser(description='makeddl_a5sql')
+    parser.add_argument('-b')
+    parser.add_argument('-o')    
+    args = parser.parse_args()
+    
+    with open(args.o, mode='w') as f:
+        MakeDDL(args.b, f) \
             .create_table() \
             .index() \
             .foreign_key() \
-            .description()
+            .description()    
+
+            
