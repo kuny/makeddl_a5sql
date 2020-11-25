@@ -1,7 +1,8 @@
 # coding=sjis
 
-import yaml
+import sys
 import os
+import openpyxl
 
 class Swap:
 
@@ -9,10 +10,15 @@ class Swap:
         print("hello")
 
     def execute(self, src, dist):
-        print("hello, hello")
+        print(src)
+        print(dist)        
 
-    with open('config.yml', encoding='utf-8') as file:
-        config = yaml.safe_load(file)
-        Swap() \
-        .execute()
 
+if __name__ == '__main__':
+    args = sys.argv
+
+    if len(args) == 3:
+        src = args[1]
+        dist = args[2]
+
+        Swap().execute(src, dist)

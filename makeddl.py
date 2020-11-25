@@ -39,11 +39,15 @@ class MakeDDL:
             i = 0
 
             for column in entity.column_infos:
+#                print(entity.entity_info.logical_entity_name)
                 
                 if i == 0:
                     self.write("  [" + column.physical_name + "] " + column.data_type + "\n")
                     i = i + 1
                 else:
+#                    if column.physical_name is None:
+#                        print(entity.entity_info.logical_entity_name)
+
                     self.write("  , [" + column.physical_name + "] " + column.data_type + "\n")
                     #self.f.write("  , [" + column.physical_name + "] " + column.physical_name + "\n")
                     #self.f.write("  , [" + column.data_type + "] " + column.data_type + "\n")
@@ -68,6 +72,15 @@ class MakeDDL:
         return self
 
     def index(self):
+
+        widgets = ['Alter Table (index) : ', progressbar.Percentage(), ' (', progressbar.Counter(), ' of ', str(len(self.book.entities)) + ') ', progressbar.Bar(), ' ', progressbar.Timer(), ' ', progressbar.ETA(), ' ', ]
+        
+        pbar = ProgressBar(maxval=len(self.book.entities), widgets=widgets).start()
+        s = 0
+        for entity in self.book.entities:
+            s = s + 1
+            time.sleep(0.1)
+            pbar.update(s)
         return self
 
     def foreign_key(self):
@@ -122,7 +135,7 @@ class MakeDDL:
             if entity.entity_info.remark is None or entity.entity_info.remark == "":
                 self.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + entity.entity_info.logical_entity_name + "', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', NULL, NULL;\n")
             else:
-                self.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + entity.entity_info.logical_entity_name + ":" + entity.entity_info.remark + "', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', NULL, NULL;\n")
+                self.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + entity.entity_info.logical_entity_name + ":" + entity.entity_info.remark.replace("'","''").replace("\n", " ") + "', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', NULL, NULL;\n")
 
             for column in entity.column_infos:
 
@@ -130,7 +143,7 @@ class MakeDDL:
                     self.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + column.physical_name + "', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', N'COLUMN', N'" + column.physical_name + "';\n")
                 else:
                     
-                    self.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + column.physical_name + ":" + column.remark +"', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', N'COLUMN', N'" + column.physical_name + "';\n")
+                    self.write("EXECUTE sp_addextendedproperty N'MS_Description', N'" + column.physical_name + ":" + column.remark.replace("'", "''").replace("\n", " ") +"', N'SCHEMA', N'dbo', N'TABLE', N'" + entity.entity_info.logical_entity_name + "', N'COLUMN', N'" + column.physical_name + "';\n")
 
             self.write("\n")
             s = s + 1
