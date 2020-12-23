@@ -81,6 +81,12 @@ class MakeDDL:
         s = 0
         for entity in self.book.entities:
             s = s + 1
+            
+            for ix in entity.index_infos:
+
+                self.write("create index " + ix.index_name + "\n")
+                self.write("  on " + entity.entity_info.logical_entity_name + "(" + ix.column_name + ");\n")
+                
             time.sleep(0.1)
             pbar.update(s)
         return self
