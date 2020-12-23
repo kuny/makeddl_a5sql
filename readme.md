@@ -11,7 +11,7 @@ A5:SQL Mk-2形式のエンティティ定義書（エクセルファイル）か
 ### Pythonライブラリインストール
 
 ```
-> pip3 install pyyaml
+> pip3 install argparse
 
 > pip3 install progressbar2
 ```
