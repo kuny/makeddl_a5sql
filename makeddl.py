@@ -162,17 +162,17 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     xlsx = args.b
-    if xlsx[0:2] != "./":
+    if xlsx[0:2] == "./":
         xlsx = os.getcwd() + "/" + xlsx[2:]
     elif xlsx[0:1] != "/":
         xlsx = os.getcwd() + "/" + xlsx
         
     ddl = args.o
-    if ddl[0:2] != "./":
+    if ddl[0:2] == "./":
         ddl = os.getcwd() + "/" + ddl[2:]
     elif ddl[0:1] != "/":
         ddl = os.getcwd() + "/" + ddl
-    
+
     with open(ddl, mode='w') as f:
         MakeDDL(xlsx, f) \
             .create_table() \
