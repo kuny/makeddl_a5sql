@@ -4,6 +4,7 @@ from defbook import ColumnInfo
 from defbook import DefBook
 
 import os
+import os.path
 import time
 import argparse
 
@@ -159,14 +160,6 @@ class MakeDDL:
             pbar.update(s)
         return self
 
-def parse_path(file):
-    file_path = file
-    if file_path[0:2] == "./":
-        file_path = os.getcwd() + "/" + file_path[2:]
-    elif file_path[0:1] != "/":
-        file_paht = os.getcwd() + "/" + file_path
-
-    return file_path
 
 if __name__ == '__main__':
 
@@ -175,9 +168,9 @@ if __name__ == '__main__':
     parser.add_argument('-o')    
     args = parser.parse_args()
 
-    xlsx = parse_path(args.b)
-    ddl = parse_path(args.o)
-
+    xlsx = os.path.abspath(args.b)
+    ddl = os.path.abspath(args.o)
+    
     with open(ddl, mode='w') as f:
         MakeDDL(xlsx, f) \
             .create_table() \
