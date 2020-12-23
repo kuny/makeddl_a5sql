@@ -3,6 +3,7 @@ from defbook import EntityInfo
 from defbook import ColumnInfo
 from defbook import DefBook
 
+import os
 import time
 import argparse
 
@@ -159,9 +160,21 @@ if __name__ == '__main__':
     parser.add_argument('-b')
     parser.add_argument('-o')    
     args = parser.parse_args()
+
+    xlsx = args.b
+    if xlsx[0:2] != "./":
+        xlsx = os.getcwd() + "/" + xlsx[2:]
+    elif xlsx[0:1] != "/":
+        xlsx = os.getcwd() + "/" + xlsx
+        
+    ddl = args.o
+    if ddl[0:2] != "./":
+        ddl = os.getcwd() + "/" + ddl[2:]
+    elif ddl[0:1] != "/":
+        ddl = os.getcwd() + "/" + ddl
     
-    with open(args.o, mode='w') as f:
-        MakeDDL(args.b, f) \
+    with open(ddl, mode='w') as f:
+        MakeDDL(xlsx, f) \
             .create_table() \
             .index() \
             .foreign_key() \
